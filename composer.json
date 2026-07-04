@@ -1,0 +1,59 @@
+{
+    "name": "stevymarlino/addon-shopper-blog",
+    "description": "Blog add on for Laravel Shopper Admin Panel",
+    "keywords": ["Laravel", "blog", "builder", "addon"],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Stevy Endaman",
+            "email": "stevyabessolo@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.3",
+        "shopper/framework": "^2.10",
+        "mckenziearts/blade-untitledui-icons": "^1.5",
+        "illuminate/cache": "^11.28|^12.0|^13.0",
+        "illuminate/container": "^11.28|^12.0|^13.0",
+        "illuminate/contracts": "^11.28|^12.0|^13.0",
+        "illuminate/support": "^11.28|^12.0|^13.0",
+        "illuminate/routing": "^11.28|^12.0|^13.0",
+        "illuminate/view": "^11.28|^12.0|^13.0",
+        "livewire/livewire": "^3.7|^4.0",
+        "spatie/laravel-package-tools": "^1.9"
+    },
+    "require-dev": {
+        "larastan/larastan": "^3.0",
+        "laravel/pint": "^1.29",
+        "orchestra/testbench": "^11.0",
+        "pestphp/pest": "^4.0",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "rector/rector": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Stevymarlino\\AddonShopperBlog\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Stevymarlino\\AddonShopperBlog\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Stevymarlino\\AddonShopperBlog\\AddonShopperBlogServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
