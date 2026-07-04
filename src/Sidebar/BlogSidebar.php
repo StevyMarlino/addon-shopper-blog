@@ -21,14 +21,14 @@ final class BlogSidebar extends AbstractAdminSidebar
             $group->item(__('Blog Posts'), function (Item $item): void {
                 $item->weight(1);
                 $item->useSpa();
-                $item->route('shopper.blog.posts.index');
+                //                $item->route('shopper.blog.posts.index'); : a activer a la création des routes et vues
                 $item->setIcon('untitledui-file-02');
             });
 
             $group->item(__('Blog Categories'), function (Item $item): void {
                 $item->weight(2);
                 $item->useSpa();
-                $item->route('shopper.blog.categories.index');
+                //                $item->route('shopper.blog.categories.index'); : a activer a la création des routes et vues
                 $item->setIcon('untitledui-tag-01');
             });
         });
