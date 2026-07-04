@@ -15,7 +15,7 @@ return RectorConfig::configure()
 
     ])
     ->withTypeCoverageLevel(8)
-    ->withCodeQualityLevel(0)
+    ->withCodeQualityLevel(6)
     ->withPreparedSets(
         deadCode: true,
         earlyReturn: true,
