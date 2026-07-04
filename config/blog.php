@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+use Stevymarlino\AddonShopperBlog\Livewire\PostIndex;
+
 return [
 
     /*
@@ -15,7 +17,9 @@ return [
     */
 
     'components' => [
-        // 'post-form' => \App\Livewire\Blog\CustomPostForm::class,
+        'post-form' => PostForm::class,
+        'post-index' => PostIndex::class,
+        'category-index' => CategoryIndex::class,
     ],
 
 ];
