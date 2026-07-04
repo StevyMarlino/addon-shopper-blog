@@ -29,7 +29,7 @@ final class BlogSidebar extends AbstractAdminSidebar
                 $item->weight(2);
                 $item->useSpa();
                 //                $item->route('shopper.blog.categories.index'); : a activer a la création des routes et vues
-                $item->setIcon('untitledui-tag-01');
+                $item->setIcon('untitledui-shopping-bag-02');
             });
         });
 
