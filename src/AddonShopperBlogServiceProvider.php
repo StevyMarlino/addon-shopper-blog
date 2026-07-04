@@ -27,4 +27,9 @@ final class AddonShopperBlogServiceProvider extends PackageServiceProvider
             $panel->addon(new BlogAddon());
         });
     }
+
+    public function packageBooted(): void
+    {
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+    }
 }
