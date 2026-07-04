@@ -12,15 +12,16 @@
     ],
     "require": {
         "php": "^8.3",
-        "shopper/framework": "^2.10",
-        "mckenziearts/blade-untitledui-icons": "^1.5",
         "illuminate/cache": "^11.28|^12.0|^13.0",
         "illuminate/container": "^11.28|^12.0|^13.0",
         "illuminate/contracts": "^11.28|^12.0|^13.0",
-        "illuminate/support": "^11.28|^12.0|^13.0",
         "illuminate/routing": "^11.28|^12.0|^13.0",
+        "illuminate/support": "^11.28|^12.0|^13.0",
         "illuminate/view": "^11.28|^12.0|^13.0",
         "livewire/livewire": "^3.7|^4.0",
+        "mckenziearts/blade-untitledui-icons": "^1.5",
+        "shopper/framework": "^2.10",
+        "spatie/laravel-medialibrary": "^11.23",
         "spatie/laravel-package-tools": "^1.9"
     },
     "require-dev": {
@@ -33,7 +34,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Stevymarlino\\AddonShopperBlog\\": "src/"
+            "Stevymarlino\\AddonShopperBlog\\": "src/",
+            "Stevymarlino\\AddonShopperBlog\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {

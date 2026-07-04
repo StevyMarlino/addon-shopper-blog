@@ -14,8 +14,11 @@ final class AddonShopperBlogServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('addon-shopper-blog')
-            ->hasConfigFile('blog');
-        // ->hasMigrations([...])   on l'ajoutera quand les migrations existeront
+            ->hasConfigFile('blog')
+            ->hasMigrations([
+                'create_blog_categories_table',
+                'create_blog_posts_table',
+            ]);
     }
 
     public function packageRegistered(): void
