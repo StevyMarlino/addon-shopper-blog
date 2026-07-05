@@ -2,8 +2,10 @@
 
 declare(strict_types=1);
 
-use Stevymarlino\AddonShopperBlog\Livewire\PostForm;
-use Stevymarlino\AddonShopperBlog\Livewire\PostIndex;
+use Stevymarlino\AddonShopperBlog\Livewire\Category\CategoryForm;
+use Stevymarlino\AddonShopperBlog\Livewire\Category\CategoryIndex;
+use Stevymarlino\AddonShopperBlog\Livewire\Post\PostForm;
+use Stevymarlino\AddonShopperBlog\Livewire\Post\PostIndex;
 
 return [
 
@@ -24,7 +26,7 @@ return [
     */
     'pages' => [
         'blog.post-index' => PostIndex::class,
-        //        'blog.category-index' => CategoryIndex::class,
+        'blog.category-index' => CategoryIndex::class,
     ],
 
     /*
@@ -35,6 +37,7 @@ return [
 
     'components' => [
         'slide-overs.post-form' => PostForm::class,
+        'slide-overs.category-form' => CategoryForm::class,
     ],
 
 ];
