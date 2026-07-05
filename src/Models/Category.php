@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use Shopper\Core\Models\Traits\HasSlug;
 use Stevymarlino\AddonShopperBlog\Database\Factories\CategoryFactory;
 
 /**
@@ -25,6 +26,8 @@ class Category extends Model
     /** @use HasFactory<CategoryFactory> */
     use HasFactory;
 
+    use HasSlug;
+
     protected $table = 'blog_categories';
 
     /** @var list<string> */
@@ -34,6 +37,15 @@ class Category extends Model
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (Category $category): void {
+            if (blank($category->slug) && filled($category->name)) {
+                $category->slug = $category->name;
+            }
+        });
     }
 
     protected static function newFactory(): CategoryFactory
