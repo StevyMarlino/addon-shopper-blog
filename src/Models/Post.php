@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Carbon;
+use Shopper\Core\Models\Traits\HasSlug;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -33,6 +34,7 @@ class Post extends Model implements HasMedia
     /** @use HasFactory<PostFactory> */
     use HasFactory;
 
+    use HasSlug;
     use InteractsWithMedia;
     use SoftDeletes;
 
@@ -80,6 +82,15 @@ class Post extends Model implements HasMedia
         return $this->status === PostStatus::Published
             && $this->published_at !== null
             && $this->published_at->isPast();
+    }
+
+    protected static function booted(): void
+    {
+        static::saving(function (Post $post): void {
+            if (blank($post->slug) && filled($post->title)) {
+                $post->slug = $post->title;
+            }
+        });
     }
 
     protected static function newFactory(): PostFactory

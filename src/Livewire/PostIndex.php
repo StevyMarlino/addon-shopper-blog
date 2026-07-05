@@ -36,6 +36,7 @@ class PostIndex extends AbstractPageComponent implements HasActions, HasSchemas,
             ->columns([
                 SpatieMediaLibraryImageColumn::make('cover')
                     ->label(__('Cover'))
+                    ->circular()
                     ->collection('cover')
                     ->grow(false),
                 TextColumn::make('title')
@@ -68,6 +69,16 @@ class PostIndex extends AbstractPageComponent implements HasActions, HasSchemas,
                     ->relationship('category', 'name'),
             ])
             ->recordActions([
+                Action::make('edit')
+                    ->label(__('Edit'))
+                    ->icon(Untitledui::Edit03)
+                    ->iconButton()
+                    ->action(fn (Post $record) => $this->dispatch(
+                        'openPanel',
+                        component: 'shopper-slide-overs.post-form',
+                        arguments: ['post' => $record],
+                    )),
+
                 Action::make('delete')
                     ->label(__('Delete'))
                     ->icon(Untitledui::Trash03)
