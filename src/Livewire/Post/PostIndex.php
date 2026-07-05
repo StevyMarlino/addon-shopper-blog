@@ -20,6 +20,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Mckenziearts\Icons\Untitledui\Enums\Untitledui;
 use Shopper\Livewire\Pages\AbstractPageComponent;
+use Stevymarlino\AddonShopperBlog\Actions\Post\DeletePost;
 use Stevymarlino\AddonShopperBlog\Enums\PostStatus;
 use Stevymarlino\AddonShopperBlog\Models\Post;
 
@@ -85,12 +86,14 @@ class PostIndex extends AbstractPageComponent implements HasActions, HasSchemas,
                     ->iconButton()
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn (Post $record) => $record->delete()),
+                    ->action(fn (Post $record) => app(DeletePost::class)->handle($record)),
             ])
             ->groupedBulkActions([
                 DeleteBulkAction::make()
                     ->requiresConfirmation()
-                    ->action(fn (Collection $records) => $records->each->delete())
+                    ->action(fn (Collection $records) => $records->each(
+                        fn (Post $record) => app(DeletePost::class)->handle($record)
+                    ))
                     ->deselectRecordsAfterCompletion(),
             ])
             ->persistFiltersInSession();

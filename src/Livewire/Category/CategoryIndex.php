@@ -18,6 +18,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\Collection;
 use Mckenziearts\Icons\Untitledui\Enums\Untitledui;
 use Shopper\Livewire\Pages\AbstractPageComponent;
+use Stevymarlino\AddonShopperBlog\Actions\Category\DeleteCategory;
 use Stevymarlino\AddonShopperBlog\Models\Category;
 
 class CategoryIndex extends AbstractPageComponent implements HasActions, HasSchemas, HasTable
@@ -63,12 +64,14 @@ class CategoryIndex extends AbstractPageComponent implements HasActions, HasSche
                     ->iconButton()
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->action(fn (Category $record) => $record->delete()),
+                    ->action(fn (Category $record) => app(DeleteCategory::class)->handle($record)),
             ])
             ->groupedBulkActions([
                 DeleteBulkAction::make()
                     ->requiresConfirmation()
-                    ->action(fn (Collection $records) => $records->each->delete())
+                    ->action(fn (Collection $records) => $records->each(
+                        fn (Category $record) => app(DeleteCategory::class)->handle($record)
+                    ))
                     ->deselectRecordsAfterCompletion(),
             ]);
     }

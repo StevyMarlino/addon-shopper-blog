@@ -16,6 +16,9 @@ use Laravelcm\LivewireSlideOvers\SlideOverComponent;
 use Shopper\Components\Section;
 use Shopper\Contracts\SlideOverForm;
 use Shopper\Traits\InteractsWithSlideOverForm;
+use Stevymarlino\AddonShopperBlog\Actions\Category\CreateCategory;
+use Stevymarlino\AddonShopperBlog\Actions\Category\UpdateCategory;
+use Stevymarlino\AddonShopperBlog\Data\CategoryData;
 use Stevymarlino\AddonShopperBlog\Models\Category;
 
 /**
@@ -68,14 +71,11 @@ class CategoryForm extends SlideOverComponent implements HasActions, HasSchemas,
 
     public function save(): void
     {
-        /** @var array<string, mixed> $state */
-        $state = $this->form->getState();
+        $data = CategoryData::fromArray($this->form->getState());
 
-        if ($this->category->exists) {
-            $this->category->update($state);
-        } else {
-            $this->category = Category::query()->create($state);
-        }
+        $this->category = $this->category->exists
+            ? app(UpdateCategory::class)->handle($this->category, $data)
+            : app(CreateCategory::class)->handle($data);
 
         Notification::make()
             ->title(__('Category saved'))

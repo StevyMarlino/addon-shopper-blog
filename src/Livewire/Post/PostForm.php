@@ -20,6 +20,9 @@ use Laravelcm\LivewireSlideOvers\SlideOverComponent;
 use Shopper\Components\Section;
 use Shopper\Contracts\SlideOverForm;
 use Shopper\Traits\InteractsWithSlideOverForm;
+use Stevymarlino\AddonShopperBlog\Actions\Post\CreatePost;
+use Stevymarlino\AddonShopperBlog\Actions\Post\UpdatePost;
+use Stevymarlino\AddonShopperBlog\Data\PostData;
 use Stevymarlino\AddonShopperBlog\Enums\PostStatus;
 use Stevymarlino\AddonShopperBlog\Models\Category;
 use Stevymarlino\AddonShopperBlog\Models\Post;
@@ -102,15 +105,13 @@ class PostForm extends SlideOverComponent implements HasActions, HasSchemas, Sli
 
     public function save(): void
     {
-        /** @var array<string, mixed> $state */
-        $state = $this->form->getState();
+        $data = PostData::fromArray($this->form->getState());
 
-        if ($this->post->exists) {
-            $this->post->update($state);
-        } else {
-            $this->post = Post::query()->create($state);
-            $this->form->model($this->post)->saveRelationships();
-        }
+        $this->post = $this->post->exists
+            ? app(UpdatePost::class)->handle($this->post, $data)
+            : app(CreatePost::class)->handle($data);
+
+        $this->form->model($this->post)->saveRelationships();
 
         Notification::make()
             ->title(__('Post saved'))
