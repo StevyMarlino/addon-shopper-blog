@@ -28,7 +28,7 @@ final class BlogSidebar extends AbstractAdminSidebar
             $group->item(__('Blog Categories'), function (Item $item): void {
                 $item->weight(2);
                 $item->useSpa();
-                // $item->route('shopper.blog.categories.index'); : a activer a la création des routes et vues
+                $item->route('shopper.blog.categories.index');
                 $item->setIcon('untitledui-shopping-bag-02');
             });
         });
