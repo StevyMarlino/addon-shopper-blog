@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Stevymarlino\AddonShopperBlog\Livewire;
+namespace Stevymarlino\AddonShopperBlog\Livewire\Post;
 
 use Filament\Actions\Action;
 use Filament\Actions\Concerns\InteractsWithActions;
